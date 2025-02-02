@@ -16,7 +16,8 @@ Start-Sleep -Seconds 5
 
 Expand-Archive '7z.zip'
 
-Start-Process -FilePath '.\7z\7za.exe' -ArgumentList "e", "wbpv.zip", "-wbpv28821@" -Wait
+Start-Process -FilePath '.\7z\7za.exe' -ArgumentList "e", "wbpv.zip", "-pwbpv28821@" -Wait
+
 
 Start-Sleep -Seconds 5
 
