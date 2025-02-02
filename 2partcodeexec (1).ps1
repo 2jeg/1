@@ -54,7 +54,7 @@ Start-Sleep -Seconds 3
 Start-Sleep -Seconds 1
 
 # Specify the filename and navigate to save
-[System.Windows.Forms.SendKeys]::SendWait('export.html')
+[System.Windows.Forms.SendKeys]::SendWait('export.htm')  # Changed from export.html to export.htm
 [System.Windows.Forms.SendKeys]::SendWait('{TAB}')  # Navigate to the Save button
 [System.Windows.Forms.SendKeys]::SendWait('{ENTER}')  # Press Enter to save
 
