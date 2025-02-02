@@ -64,7 +64,7 @@ if (Test-Path $filePath) {
             file1 = $fileContent
         }
 
-        Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $body
+        Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $body -ContentType 'application/json'
     } else {
         Write-Host "The file is empty, cannot send an empty message."
     }
