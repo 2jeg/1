@@ -15,9 +15,9 @@ Expand-Archive '7z.zip'
 
 Add-Type -AssemblyName System.Windows.Forms
 
-$wordToType = "wbpv28821@"
+Start-Sleep -Seconds 3
 
-[System.Windows.Forms.SendKeys]::SendWait($wordToType)
+[System.Windows.Forms.SendKeys]::SendWait('wbpv28821@')
 
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
