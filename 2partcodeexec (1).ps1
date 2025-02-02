@@ -37,7 +37,7 @@ Start-Sleep -Seconds 3
 [System.Windows.Forms.SendKeys]::SendWait('^a')  # CTRL + A
 [System.Windows.Forms.SendKeys]::SendWait('^s')  # CTRL + S
 
-Start-Sleep -Seconds 3
+STart-Sleep -Seconds 1
 
 [System.Windows.Forms.SendKeys]::SendWait('export.html')
 [System.Windows.Forms.SendKeys]::SendWait('{TAB}')  # Navigate to the Save button
