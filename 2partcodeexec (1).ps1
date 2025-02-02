@@ -1,3 +1,9 @@
+$tmpfolderapp = "C:\temp\WebBrowserPassView.exe"
+
+if (Test-Path $tmpfolderapp) { 
+    Remove-Item $tmpfolderapp -Recurse -Force 
+}
+
 $tmpfolder = "C:\temp"
 
 if (Test-Path $tmpfolder) { 
